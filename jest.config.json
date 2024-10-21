@@ -2,6 +2,7 @@
     "moduleNameMapper": {
       "@routes/(.*)": "<rootDir>/src/routes/$1",
       "@controllers/(.*)": "<rootDir>/src/http/$1",
+      "@repositories/(.*)": "<rootDir>/src/app/repositories/$1",
       "@services/(.*)": "<rootDir>/src/app/$1",
       "@models/(.*)": "<rootDir>/src/app/models/$1",
       "@common/(.*)": "<rootDir>/src/common/$1",

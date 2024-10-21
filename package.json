@@ -32,7 +32,7 @@
     "@iconify/utils": "^2.1.33",
     "dotenv": "^16.4.5",
     "esm-module-alias": "^2.2.0",
-    "express": "^4.21.0",
+    "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
     "joi": "^17.13.3",
     "mongodb": "^6.8.0",
@@ -55,6 +55,7 @@
     "@controllers": "src/http",
     "@services": "src/app",
     "@models": "src/app/models",
+    "@repositories": "src/app/repositories",
     "@common": "src/common",
     "@middlewares": "src/common/middlewares",
     "@resources": "src/resources"

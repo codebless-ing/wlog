@@ -2,6 +2,7 @@ import { CreateArticleInputDto } from "@common/dto/article/create.dto.js";
 import { ReadArticleInputDto } from "@common/dto/article/read.dto.js";
 import { UpdateArticleInputDto } from "@common/dto/article/update.dto.js";
 import { DeleteArticleInputDto } from "@common/dto/article/delete.dto.js";
+import { ListArticleInputDto } from "@common/dto/article/list.dto.js";
 import { HttpException } from "@common/exceptions/appExceptions.js";
 
 const ModelMock = (await import("@models/model.mock.js")).default;
@@ -25,6 +26,7 @@ const spies = {
     read: jest.spyOn(service, "read"),
     update: jest.spyOn(service, "update"),
     delete: jest.spyOn(service, "delete"),
+    list: jest.spyOn(service, "list"),
 };
 
 afterEach(() => {
@@ -137,7 +139,7 @@ describe("Article controller", () => {
                     body: {
                         title: "Big titley",
                         body: "Bodey",
-                        tags: ["uiop", "jklc"]
+                        tags: ["uiop", "jklc"],
                     },
                 };
                 ModelMock.addDocToCollection(req.params.id, { title: "a", body: "b" });
@@ -204,6 +206,28 @@ describe("Article controller", () => {
             test("should throw a 404 HTTPException", () => {
                 expect(controller.delete(req, res)).rejects.toThrow(HttpException);
             });
+        });
+    });
+
+    // LIST
+    describe("when listing articles", () => {
+        let req = {};
+
+        beforeEach(() => {
+            req.query = {
+                title: "magic",
+                tags: "key,word",
+            };
+        });
+
+        test("should communicate with service layer through the use of dto", async () => {
+            await controller.list(req, res);
+            expect(spies.list).toBeCalledWith(expect.any(ListArticleInputDto));
+        });
+
+        test("should respond with 200", async () => {
+            await controller.list(req, res);
+            expect(res.status).toBeCalledWith(200);
         });
     });
 });

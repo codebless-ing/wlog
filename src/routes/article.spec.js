@@ -83,11 +83,14 @@ describe("Article Controller", () => {
 
         describe("receiving a valid id", () => {
             test("should return a page with 200", (done) => {
-                const res = request(app).put("/article/601060106010601060106010").type("form").send({
-                    title: "New title",
-                    body: "New body",
-                    tags: ["New tag"],
-                });
+                const res = request(app)
+                    .put("/article/601060106010601060106010")
+                    .type("form")
+                    .send({
+                        title: "New title",
+                        body: "New body",
+                        tags: ["New tag"],
+                    });
 
                 res.expect("content-type", /html/).expect(200, done);
             });
@@ -107,11 +110,14 @@ describe("Article Controller", () => {
 
         describe("receiving a non-existent id", () => {
             test("should return a page with 404", (done) => {
-                const res = request(app).put("/article/070907090709070907090709").type("form").send({
-                    title: "My experiences with marketing my game",
-                    body: "Basically, I just put 'featuring AsbelianKeys' on the cover and we were sold out of physical (and digital) medias in 9 hours.",
-                    tags: ["gamedev", "marketing"],
-                });
+                const res = request(app)
+                    .put("/article/070907090709070907090709")
+                    .type("form")
+                    .send({
+                        title: "My experiences with marketing my game",
+                        body: "Basically, I just put 'featuring AsbelianKeys' on the cover and we were sold out of physical (and digital) medias in 9 hours.",
+                        tags: ["gamedev", "marketing"],
+                    });
 
                 res.expect("Content-Type", /html/).expect(404, done);
             });
@@ -137,6 +143,15 @@ describe("Article Controller", () => {
 
                 res.expect("Content-Type", /html/).expect(404, done);
             });
+        });
+    });
+
+    // LIST
+    describe("when listing articles", () => {
+        test("should return a page with 200", (done) => {
+            const res = request(app).get("/article/").send();
+
+            res.expect("content-type", /html/).expect(200, done);
         });
     });
 });

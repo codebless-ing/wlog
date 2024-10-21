@@ -43,9 +43,33 @@ hr {
     #content {
         padding: 2em;
     }
+
+    a {
+        color: $accent-colour;
+        text-decoration: none;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    #desc {
+        padding-left: 5ex;
+        padding-bottom: 5ex;
+    }
 }
 
 #footer {
     text-align: center;
     padding: 0.5em;
+}
+
+input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 1ex;
+    margin-bottom: 1ex;
+    margin-right: 1ex;
+}
+
+input:focus {
+    outline: none;
 }

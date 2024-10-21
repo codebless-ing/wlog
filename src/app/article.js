@@ -3,6 +3,10 @@ import { CreateArticleOutputDto } from "@common/dto/article/create.dto.js";
 import { ReadArticleOutputDto } from "@common/dto/article/read.dto.js";
 import { UpdateArticleOutputDto } from "@common/dto/article/update.dto.js";
 import { DeleteArticleOutputDto } from "@common/dto/article/delete.dto.js";
+import { ListArticleOutputDto } from "@common/dto/article/list.dto.js";
+import ArticleRepository from "@repositories/article.repository.js";
+
+const repository = new ArticleRepository();
 
 export default {
     create: async ({ title, body, tags }) => {
@@ -17,13 +21,13 @@ export default {
             await article.save();
         } catch (error) {
             //error.errors.properties.message
-            return new CreateArticleOutputDto({}, false, JSON.stringify(error.errors))
+            return new CreateArticleOutputDto({}, false, JSON.stringify(error.errors));
         }
 
         return new CreateArticleOutputDto(article);
     },
 
-    read: async ({id}) => {
+    read: async ({ id }) => {
         const article = await new Article(id);
 
         if (!article._id) {
@@ -51,13 +55,13 @@ export default {
             await article.save();
         } catch (error) {
             //error.errors.properties.message
-            return new CreateArticleOutputDto({}, false, JSON.stringify(error.errors))
+            return new CreateArticleOutputDto({}, false, JSON.stringify(error.errors));
         }
 
         return new UpdateArticleOutputDto(article, true, "Article updated successfully");
     },
 
-    delete: async ({id}) => {
+    delete: async ({ id }) => {
         const article = await new Article(id);
 
         if (!article._id) {
@@ -67,5 +71,11 @@ export default {
         article.delete();
 
         return new DeleteArticleOutputDto({}, true, "Article deleted successfully");
+    },
+
+    list: async ({ title, tags }) => {
+        const articles = await repository.filter(title, tags);
+
+        return new ListArticleOutputDto(articles, true, "Articles fetched");
     },
 };

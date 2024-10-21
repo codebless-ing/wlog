@@ -10,7 +10,7 @@ const logger = newLogger("Dto|BaseDto");
 class BaseOutputDto {
     success;
 
-    constructor(success, info) {
+    constructor(success, info = []) {
         info = Array.isArray(info) ? info : [info];
         let dtoInfo = [];
 

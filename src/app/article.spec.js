@@ -153,22 +153,22 @@ describe("Article Service", () => {
             });
 
             test("should have an Article Model with said data", async () => {
-                await ArticleService.delete({id: id});
+                await ArticleService.delete({ id: id });
                 expect(ArticleModel).toHaveBeenCalledTimes(1);
             });
 
             test("should request the new data to be deleted through db lib", async () => {
-                await ArticleService.delete({id: id});
+                await ArticleService.delete({ id: id });
                 expect(ModelMock.object.delete).toHaveBeenCalledTimes(1);
             });
 
             test("should delete the data", async () => {
-                await ArticleService.delete({id: id});
+                await ArticleService.delete({ id: id });
                 expect(ModelMock.collection[id]).toBeUndefined();
             });
 
             test("should return data in a standard output dto, with success", () => {
-                const result = ArticleService.delete({id: id});
+                const result = ArticleService.delete({ id: id });
                 expect(result).resolves.toMatchObject({ success: true });
                 expect(result).resolves.toBeInstanceOf(BaseOutputDto);
             });
@@ -182,7 +182,7 @@ describe("Article Service", () => {
             });
 
             test("should return a standard output dto, with success = false", () => {
-                const result = ArticleService.delete({id: "0709"});
+                const result = ArticleService.delete({ id: "0709" });
 
                 expect(result).resolves.toMatchObject({
                     info: ["Article not found"],
@@ -190,6 +190,32 @@ describe("Article Service", () => {
                 });
                 expect(result).resolves.toBeInstanceOf(BaseOutputDto);
             });
+        });
+    });
+
+    // LIST
+    describe("when listing articles", () => {
+        test("should return an array of articles in a standard output dto, with success", () => {
+            // Create true articles expecting them to be retrieved by list()
+            ModelMock.addDocToCollection(124, {
+                title: "vey",
+                body: "fi",
+                tags: ["dum", "uber"],
+            });
+            ModelMock.addDocToCollection(125, {
+                title: "gib",
+                body: "ber",
+                tags: [],
+            });
+
+            const result = ArticleService.list({ title: "search-text", tags: [] });
+
+            expect(result).resolves.toMatchObject({
+                info: ["Articles fetched"],
+                success: true,
+                data: [ModelMock.collection[124], ModelMock.collection[125]],
+            });
+            expect(result).resolves.toBeInstanceOf(BaseOutputDto);
         });
     });
 });

@@ -64,4 +64,8 @@ export default class BaseModel {
         }
         this.#doc = this.#model = null;
     }
+
+    async find(filter) {
+        return await this.#model.find(filter);
+    }
 }

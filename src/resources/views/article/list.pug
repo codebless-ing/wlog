@@ -1,0 +1,12 @@
+extends /layout/app.pug
+
+block content
+  include filter.pug
+  table
+    each val in body
+      tr
+        td
+          a(href="article/"+val._id)=val.title
+      tr
+        td#desc=val.body
+        td#desc=val.tags

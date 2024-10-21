@@ -27,6 +27,7 @@ ModelMock.GooseModel = class {
 ModelMock.object = {
     save: jest.fn(),
     delete: jest.fn(),
+    find: jest.fn(),
 };
 
 /*
@@ -63,6 +64,10 @@ ModelMock.clearModelObject = (clearSpies = true) => {
                 // When deleting a doc, clears the model's properties but keep the state of the spies
                 ModelMock.clearModelObject(false);
             })),
+
+            find: jest.fn(async (query) => {
+                return Object.values(ModelMock.collection);
+            }),
         };
     } else {
         ModelMock.object = {

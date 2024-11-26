@@ -12,6 +12,7 @@ router.locals.routes = routes;
 
 const controller = new ArticleController();
 
+namedRouter.get("articleNew", "/new", controller.new);
 namedRouter.post("articleCreate", "/", controller.create);
 namedRouter.get("articleList", "/", controller.list);
 namedRouter.get("articleRead", "/:id", controller.read);

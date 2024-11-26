@@ -37,6 +37,21 @@ class BaseController {
             req.flash('validation', validation);
         }
 
+        if (req.body) {
+            const content = {};
+
+            for (const d in req.body) {
+                if (d != "tags") {
+                    content[d] = req.body[d];
+                    continue
+                }
+
+                content[d] = req.body[d].join(",");
+            }
+
+            req.flash('content', content);
+        }
+
         logger.info("Invalid data (%j): %s", req.body, error);
         return res.status(400);
     }

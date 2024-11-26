@@ -55,6 +55,7 @@ export default class BaseModel {
         }
 
         await this.#doc.save();
+        this._id = this.#doc._id;
     }
 
     async delete() {

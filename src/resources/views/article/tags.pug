@@ -1,0 +1,8 @@
+extends /layout/app.pug
+
+block content
+  div.tags
+    each tag in result
+      i.icon-tag-multiple
+      a(href=routes.articleList({}, { tags: tag }))=" " + tag
+      br

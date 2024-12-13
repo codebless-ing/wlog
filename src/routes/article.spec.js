@@ -23,7 +23,7 @@ describe("Article Controller", () => {
                         tags: ["asdf", "qwert", "zxcv"],
                     });
 
-                res.expect("content-type", /html/).expect(200, done);
+                res.expect(302, done);
             });
         });
 

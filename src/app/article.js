@@ -78,4 +78,10 @@ export default {
 
         return new ListArticleOutputDto(articles, true, "Articles fetched");
     },
+
+    distinct: async(field) => {
+        const result = await new Article();
+
+        return result.distinct(field);
+    },
 };

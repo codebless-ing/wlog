@@ -90,6 +90,10 @@ hr {
         color: $accent-colour;
     }
 
+    input:focus {
+        outline: none;
+    }
+
     button {
         height: 2.7rem;
 
@@ -111,6 +115,52 @@ hr {
         fill: $accent-colour;
 
         pointer-events: none;
+    }
+
+    .fluid {
+        width: 100%;
+    }
+}
+
+.articleInput {
+    input {
+        height: 2.7rem;
+
+        padding-left: 2.5rem;
+        border: none;
+
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+
+        background-color: $primary-colour;
+        color: $accent-colour;
+    }
+
+    textarea {
+        padding-left: 2.5rem;
+        border: none;
+
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+
+        background-color: $primary-colour;
+        color: $accent-colour;
+    }
+
+    textarea:focus, input:focus {
+        outline: none;
+    }
+
+    button {
+        float: right;
+        height: 2.7rem;
+
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border: none;
+
+        color: $accent-colour;
+        background-color: $primary-colour;
     }
 
     .fluid {
@@ -142,5 +192,16 @@ hr {
 
     .tags {
         text-align: right;
+    }
+}
+
+.tags {
+    line-height: 2em;
+    a {
+        color: $accent-colour;
+        text-decoration: none;
+    }
+    i {
+        vertical-align: sub;
     }
 }

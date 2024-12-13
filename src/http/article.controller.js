@@ -19,9 +19,9 @@ class ArticleController extends BaseController {
                 throw new HttpException(400, result.info);
             }
 
-            return res.status(200).send(`Article [${result._id}] created successfully!`);
+            return res.redirect(routes.articleRead({ id: result.data._id.toString() }));
         } catch (error) {
-            return this.reportBadData(error, req, res).redirect(routes.articleList());
+            return this.reportBadData(error, req, res).redirect(routes.articleNew());
         }
     };
 
@@ -82,6 +82,16 @@ class ArticleController extends BaseController {
             return this.reportBadData(error, req, res);
         }
     };
+
+    new = async (req, res) => {
+        return res.status(200).render("article/new");
+    };
+
+    tags = async (req, res) => {
+        const result = await service.distinct("tags");
+
+        return res.status(200).render("article/tags", {result});
+    }
 }
 
 export default ArticleController;

@@ -1,0 +1,10 @@
+extends /layout/app.pug
+
+block content
+  h1(style="text-align:center;") Create your article!
+  form(role='form' method='POST' action='/article')
+    div.articleInput
+      input(type="text" placeholder="Title" name="title")&attributes(messages.content ? {'value': messages.content[0].title} : '').fluid
+      textarea(name="body" rows="10" placeholder="Write your message here").fluid= messages.content ? messages.content[0].body : ''
+      input(type="text" placeholder="Tags; ex: tag1,tag2,tag3" name="tags")&attributes(messages.content ? {'value': messages.content[0].tags.join(",")} : '').fluid
+      button(type="submit") Create
